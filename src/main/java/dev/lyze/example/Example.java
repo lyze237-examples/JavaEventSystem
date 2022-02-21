@@ -20,8 +20,8 @@ public class Example
 
     private void fire()
     {
-        events.fire(new TestEvent(new TestEvent.TestEventData("Hello!")));
-        events.fire(new TestEvent(new TestEvent.TestEventData("Owls are cool")));
+        events.fire(new TestEvent("Hello!"));
+        events.fire(new TestEvent("Owls are cool"));
 
         /*
         Outputs:
@@ -33,13 +33,13 @@ public class Example
 
     private void registerListeners()
     {
-        // This gets called whenever a TestEvent fires
-        events.addListener(new EventListener<>(TestEvent.class)
+        // This gets called whenever a TestEvent fires before all other listeners fire
+        events.addPreListener(new EventListener<>(TestEvent.class)
         {
             @Override
             protected void fire(TestEvent event)
             {
-                System.out.println("First listener fired! " + event.getData().getCoolString());
+                System.out.println("First listener fired! " + event.getCoolString());
             }
         });
 
@@ -49,13 +49,13 @@ public class Example
             @Override
             protected void fire(TestEvent event)
             {
-                System.out.println("Second listener fired! " + event.getData().getCoolString());
+                System.out.println("Second listener fired! " + event.getCoolString());
             }
 
             @Override
             protected boolean shouldFire(TestEvent event)
             {
-                return "Owls are cool".equals(event.getData().getCoolString());
+                return "Owls are cool".equals(event.getCoolString());
             }
         });
     }

@@ -2,7 +2,7 @@ package dev.lyze.eventsystem;
 
 import dev.lyze.eventsystem.events.Event;
 
-public abstract class EventListener<TEvent extends Event<?>>
+public abstract class EventListener<TEvent extends Event>
 {
     private final Class<TEvent> clazz;
     private final Object bind;
@@ -28,7 +28,7 @@ public abstract class EventListener<TEvent extends Event<?>>
     protected abstract void fire(TEvent event);
 
     @SuppressWarnings("unchecked")
-    final <T extends Event<?>> void castAndFire(T event)
+    final <T extends Event> void castAndFire(T event)
     {
         fire((TEvent) event);
     }
@@ -44,7 +44,7 @@ public abstract class EventListener<TEvent extends Event<?>>
     }
 
     @SuppressWarnings("unchecked")
-    final <T extends Event<?>> boolean shouldCastAndFire(T event)
+    final <T extends Event> boolean shouldCastAndFire(T event)
     {
         return shouldFire((TEvent) event);
     }

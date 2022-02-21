@@ -1,32 +1,23 @@
 package dev.lyze.example.events;
 
-import dev.lyze.eventsystem.data.EventData;
 import dev.lyze.eventsystem.events.Event;
 
-public class TestEvent extends Event<TestEvent.TestEventData>
+public class TestEvent extends Event
 {
-    public TestEvent(TestEventData data)
+    private String coolString;
+
+    public TestEvent(String coolString)
     {
-        super(data);
+        this.coolString = coolString;
     }
 
-    public static class TestEventData extends EventData
+    public void setCoolString(String coolString)
     {
-        private String coolString;
+        this.coolString = coolString;
+    }
 
-        public TestEventData(String coolString)
-        {
-            this.coolString = coolString;
-        }
-
-        public void setCoolString(String coolString)
-        {
-            this.coolString = coolString;
-        }
-
-        public String getCoolString()
-        {
-            return coolString;
-        }
+    public String getCoolString()
+    {
+        return coolString;
     }
 }
